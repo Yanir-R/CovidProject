@@ -1,13 +1,12 @@
 import React from 'react';
 import { Country } from './Country';
 
-export const CountryList: React.FC<any> = ({ covidData }) => {
-
+export const CountryList: React.FC<any> = ({ covidCountriesData }) => {
     return (
         <>
-            <h1>Country List:</h1>
 
-            {covidData.map((covidInfo: any, index: any) => (
+
+            {covidCountriesData.map((covidInfo: any, index: any) => (
                 <ul key={index}>
                     <Country
                         Country={covidInfo.Country}

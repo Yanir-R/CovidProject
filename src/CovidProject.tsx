@@ -1,29 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import { api } from './api'
 import { CountryList } from './components/CountryList'
+import { GlobalList } from './components/GlobalList'
+import './App.css'
 
 export const CovidProject: React.FC = () => {
-    let [covidData, setCovidData] = useState<any>([])
+    let [covidCountriesData, setCovidCountriesData] = useState<any>([])
+    let [covidGlobalData, setCovidGlobalData] = useState<any>([])
 
     useEffect(() => {
-        fetchCovidData()
+        fetchCovidCountriesData()
     }, [])
 
-    const fetchCovidData = async () => {
-        let dataResponse = await api.getSummaryData()
-        setCovidData(dataResponse)
-        // console.log('Country Data:', dataResponse)
-        return dataResponse
-    }
 
+    const fetchCovidCountriesData = async () => {
+        let dataCountriesResponse = await api.getSummaryData()
+        setCovidCountriesData(dataCountriesResponse.Countries)
+        setCovidGlobalData(dataCountriesResponse.Global)
+        return dataCountriesResponse
+    }
 
     return (
         <>
-            <div>
-                <h1>covid Data</h1>
-            </div>
-            <div>
-                <CountryList covidData={covidData} />
+            <h1>Covid Data</h1>
+            <div className='container'>
+                <div>
+
+                </div>
+                <div>
+                    <CountryList covidCountriesData={covidCountriesData} />
+                </div>
+                <div>
+                    <GlobalList covidGlobalData={covidGlobalData} />
+                </div>
             </div>
         </>
     )
